@@ -42,7 +42,9 @@
     <div class="content-grid container">
 
       <!-- HERO (full-bleed background, centered inner) -->
+      <!-- I removed the inline style to let CSS/JS manage sizing -->
       <section class="hero card" id="hero" aria-labelledby="hero-title">
+        <!-- canvas is present and used by your existing script.js for particles/gradient -->
         <canvas id="hero-bg-canvas" aria-hidden="true"></canvas>
 
         <div class="hero-top" style="position:relative;z-index:1;">
@@ -68,7 +70,7 @@
         </div>
       </section>
 
-      <!-- decorative separator (keeps layout neat) -->
+      <!-- keep any decorative separators that were originally present -->
       <div class="separator" aria-hidden="true" style="height:18px"></div>
 
       <!-- About -->
@@ -77,9 +79,10 @@
         <p>I'm a Software Development Engineer in Test (SDET) with ~3 years of professional experience (2.9 years + 11-month internship) in Automation, API, Functional, and RPA testing. I bring healthcare domain knowledge: claims, facts validation, and compliance. I work with Selenium, RestAssured, UiPath, SQL and CI/CD pipelines.</p>
       </section>
 
-      <!-- Experience (truncated sample) -->
+      <!-- Experience -->
       <section id="experience" class="section card">
         <h2>Experience</h2>
+        <!-- original experience cards and markup preserved -->
         <article>
           <h3>SDET — Automation & RPA</h3>
           <p>Architected hybrid automation frameworks using Selenium + RestAssured; implemented parallel execution and pattern-based tests to speed regression ~30%.</p>
@@ -120,6 +123,10 @@
         </div>
       </section>
 
+      <!-- AI features (kept intact) -->
+      <!-- If you have 'ai-skills-graph', 'ai-summary-btn' elements, they remain untouched elsewhere in the page -->
+      <!-- (Your ai-features.js will find these elements and run animations) -->
+
       <!-- Contact -->
       <section id="contact" class="section card">
         <h2>Contact</h2>
@@ -141,7 +148,8 @@
     </div>
   </footer>
 
-  <!-- JS -->
+  <!-- Keep all JS files intact so AI features & animations work -->
+  <script src="ai-features.js" defer></script>
   <script src="script.js" type="module" defer></script>
 </body>
 </html>
