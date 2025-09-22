@@ -11,9 +11,9 @@
   --max-w: 980px;
   --ff: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
 
-  /* easy tuneable hero controls */
-  --hero-height: 460px;     /* make hero taller: increase value (px) */
-  --hero-radius: 0px;       /* change corner radius: 0 = flat full-bleed, 18px = rounded */
+  /* hero controls */
+  --hero-height: 460px;     /* increase to make hero taller */
+  --hero-radius: 0px;       /* 0 = flat full-bleed, set to 18px for rounded */
 }
 
 /* Dark theme (optional) */
@@ -74,23 +74,21 @@ body{
 .nav-link:hover{color:var(--text);background:rgba(6,182,212,0.06)}
 
 /* hero area */
-/* make hero full-bleed while keeping inner content centered */
+/* full-bleed trick: hero stretches edge-to-edge while inner content stays centered */
 .hero {
-  /* full-bleed trick */
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   width: 100vw;
   box-sizing: border-box;
-  border-radius: var(--hero-radius) var(--hero-radius)  var(--hero-radius) var(--hero-radius);
+  border-radius: var(--hero-radius) var(--hero-radius) var(--hero-radius) var(--hero-radius);
   overflow: hidden;
   padding: 32px 18px;
   min-height: var(--hero-height);
-  display:block;
   position:relative;
   background: linear-gradient(90deg, rgba(124,92,255,0.95), rgba(6,182,212,0.95));
 }
 
-/* hero canvas (background) */
+/* hero canvas (background) — responsive */
 #hero-bg-canvas {
   position: absolute;
   top: 0;
@@ -110,7 +108,7 @@ body{
   gap:18px;
   align-items:center;
   flex-wrap:wrap;
-  position:relative; /* over canvas */
+  position:relative;
   z-index:1;
 }
 
@@ -172,7 +170,7 @@ html,body,.container,.content-grid,.card,.section{max-width:100%;overflow-x:hidd
   .hero {
     padding: 24px 12px;
     min-height: 360px;
-    border-radius: 0 0 12px 12px; /* preserve small radius on mobile if desired */
+    border-radius: 0 0 12px 12px;
   }
   .avatar{width:80px;height:80px}
   .name{font-size:1.1rem}
