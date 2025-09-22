@@ -10,9 +10,13 @@
   --radius: 12px;
   --max-w: 980px;
   --ff: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+
+  /* easy tuneable hero controls */
+  --hero-height: 460px;     /* make hero taller: increase value (px) */
+  --hero-radius: 0px;       /* change corner radius: 0 = flat full-bleed, 18px = rounded */
 }
 
-/* Dark theme */
+/* Dark theme (optional) */
 [data-theme="dark"]{
   --bg: linear-gradient(180deg,#091024 0%, #071021 35%, #05101b 100%);
   --panel: #071324;
@@ -25,7 +29,7 @@
 
 /* Reset & base */
 *{box-sizing:border-box}
-html,body{height:100%}
+html,body{height:100%;overflow-x:hidden}
 body{
   margin:0;
   font-family:var(--ff);
@@ -69,19 +73,61 @@ body{
 .nav-link{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px}
 .nav-link:hover{color:var(--text);background:rgba(6,182,212,0.06)}
 
-/* hero */
-.hero-top{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-.avatar{width:110px;height:110px;border-radius:999px;overflow:hidden;flex:0 0 auto}
-.avatar img{width:100%;height:100%;object-fit:cover;display:block}
-.name{font-size:1.4rem;font-weight:700;margin:0}
-.sub{color:var(--muted);margin:6px 0 0 0}
-
-/* responsive hero tweaks */
-@media (max-width:800px){
-  .hero-top{flex-direction:column;align-items:center;text-align:center;gap:8px}
-  .avatar{width:80px;height:80px;margin:0 auto 8px}
-  .name{font-size:1.1rem}
+/* hero area */
+/* make hero full-bleed while keeping inner content centered */
+.hero {
+  /* full-bleed trick */
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  width: 100vw;
+  box-sizing: border-box;
+  border-radius: var(--hero-radius) var(--hero-radius)  var(--hero-radius) var(--hero-radius);
+  overflow: hidden;
+  padding: 32px 18px;
+  min-height: var(--hero-height);
+  display:block;
+  position:relative;
+  background: linear-gradient(90deg, rgba(124,92,255,0.95), rgba(6,182,212,0.95));
 }
+
+/* hero canvas (background) */
+#hero-bg-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* inner hero content remains centered and constrained */
+.hero .hero-top {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 6px;
+  display:flex;
+  gap:18px;
+  align-items:center;
+  flex-wrap:wrap;
+  position:relative; /* over canvas */
+  z-index:1;
+}
+
+/* avatar */
+.avatar{width:110px;height:110px;border-radius:999px;overflow:hidden;flex:0 0 110px;box-shadow:0 8px 26px rgba(16,24,40,0.08)}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* hero text */
+.name{margin:0;font-size:1.45rem;font-weight:800;color:#fff}
+.lead{margin:8px 0;color:rgba(255,255,255,0.9);max-width:60ch}
+.hero-actions{display:flex;gap:10px;margin-top:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.95)}
+
+.signature{opacity:0.85;color:rgba(255,255,255,0.85);margin-top:8px}
+.meta{margin-top:12px;color:rgba(255,255,255,0.85);font-size:0.95rem}
 
 /* projects grid */
 .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
@@ -122,15 +168,15 @@ html,body,.container,.content-grid,.card,.section{max-width:100%;overflow-x:hidd
 }
 
 /* Small screens */
-@media (max-width: 600px){
-  .container{padding:0 6px}
+@media (max-width: 800px){
+  .hero {
+    padding: 24px 12px;
+    min-height: 360px;
+    border-radius: 0 0 12px 12px; /* preserve small radius on mobile if desired */
+  }
+  .avatar{width:80px;height:80px}
+  .name{font-size:1.1rem}
   .projects-grid{grid-template-columns:1fr}
-  .name{font-size:1rem}
 }
 
-/* small visual polish for cards */
-.card .meta{color:var(--muted);font-size:0.9rem}
-.card .actions{display:flex;gap:8px;flex-wrap:wrap}
-
-/* keep avatars and images sharp */
 img{max-width:100%;height:auto;display:block}
