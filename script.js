@@ -131,8 +131,20 @@ window.addEventListener('DOMContentLoaded', () => {
     canvas.width = window.innerWidth;
     canvas.height = 320;
   }
-  resize();
-  window.addEventListener('resize', resize);
+ function resize() {
+  // prefer the hero element's actual size so canvas resolution matches visuals
+  const hero = document.getElementById('hero');
+  if (hero) {
+    const rect = hero.getBoundingClientRect();
+    canvas.width = Math.max(rect.width, window.innerWidth || rect.width);
+    // use computed height of hero (includes padding) — fallback to 320
+    canvas.height = Math.max(Math.round(rect.height), 320);
+  } else {
+    canvas.width = window.innerWidth;
+    canvas.height = 320;
+  }
+}
+
   // Simple animated gradient/particles
   let t = 0;
   function draw() {
